@@ -2,7 +2,7 @@
 {
     public interface IHttpClientService
     {
-        Task<string> GetData();
+        Task<RootObject> GetData();
 
     }
 }

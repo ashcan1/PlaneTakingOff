@@ -1,9 +1,14 @@
-﻿namespace FlightTakingOff.Model
+﻿public class RootObject
 {
-    public class FlightModel
-    {
-        public Data Data { get; set; }
-
-
-    }
+    public bool Success { get; set; }
+    public List<Data> Data { get; set; }
 }
+public class Data
+{
+    public string type { get; set; }
+    public string status { get; set; }
+}
+
+
+
+    
