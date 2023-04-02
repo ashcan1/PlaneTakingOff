@@ -1,4 +1,4 @@
-﻿public class RootObject
+public class RootObject
 {
     public bool Success { get; set; }
     public List<Data> Data { get; set; }
@@ -18,8 +18,8 @@ public class Departure
 {
     public string IataCode { get; set; }
     public string IcaoCode { get; set; }
-    public int Delay { get; set; }
-    public string ScheduledTime { get; set; }
+    public int? Delay { get; set; }
+    public DateTime ScheduledTime { get; set; }
     public string EstimatedTime { get; set; }
     public string ActualTime { get; set; }
     public string EstimatedRunway { get; set; }
@@ -34,7 +34,7 @@ public class Arrival
     public string Terminal { get; set; }
     public string Baggage { get; set; }
     public string Gate { get; set; }
-    public int Delay { get; set; }
+    public int? Delay { get; set; }
     public string ScheduledTime { get; set; }
     public string EstimatedTime { get; set; }
 }

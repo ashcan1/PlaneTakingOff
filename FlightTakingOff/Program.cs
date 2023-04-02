@@ -1,6 +1,12 @@
+using FlightTakingOff;
 using FlightTakingOff.Interfaces;
 using FlightTakingOff.Services;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+
 
 
 
@@ -13,6 +19,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
 
 builder.Services.AddScoped<IHttpClientService, ApiService>();

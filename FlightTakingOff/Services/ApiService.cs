@@ -1,23 +1,38 @@
-﻿using FlightTakingOff.Interfaces;
+using FlightTakingOff.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Options;
 
 namespace FlightTakingOff.Services
 {
 
     public class ApiService : IHttpClientService
     {
-        public async Task <RootObject>GetData() {
+        private readonly ApiSettings _settings;
 
-            var URL = $"https://app.goflightlabs.com/historical/2023-01-02?access_key=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMDdmZWFkZWUzMjdhZDdjZTZkMDdmNjA5MTI1NDZjY2I3YzE3MGEwY2ZlZjVkZjliYTA5MmQzOGFiOWJlYmRiOTRjYmJkYzg3NGIzZjIwNTYiLCJpYXQiOjE2NzUzNzMwMTMsIm5iZiI6MTY3NTM3MzAxMywiZXhwIjoxNzA2OTA5MDEzLCJzdWIiOiIxOTkzMCIsInNjb3BlcyI6W119.MIs_Nis2j9l2o9aZ3oavKJCi3msCm7VK8UE9vWnciXHefOYUVaYDPu3W1zr3jcjv2XrzMeXFWYVcQIoSJQP2cw&code=BHX&type=departure";
-            var httpClinet = new HttpClient();
-            var response = await httpClinet.GetAsync(URL);
-            var json = await response.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<RootObject>(json);
-
-
-        }
+    public ApiService(IOptions<ApiSettings> apiSettings)
+    {
+      _settings = apiSettings.Value;
     }
+        public async Task <RootObject>GetData() {
+      var URL = _settings.AccessKey;
+        string iataCode = "BHX";
+        string type = "departure";
+        using (var httpClient = new HttpClient())
+        {
+        var targetDateTime = DateTime.Now.AddHours(2); // For example, fetch flights in 2 hours
+        var requestUrl = $"{URL}?iataCode={iataCode}&type={type}&date={targetDateTime.ToString("yyyy-MM-ddTHH:mm:ss")}";
+        var response = await httpClient.GetAsync(requestUrl);
+        var json = await response.Content.ReadAsStringAsync();
+        var rootObject = JsonConvert.DeserializeObject<RootObject>(json);
+        rootObject.Data = rootObject.Data.Where(f => f.Departure.ScheduledTime > DateTime.Now).ToList();
+
+        return rootObject;
+      }
+    }
+  }
 }
+
+
+// 

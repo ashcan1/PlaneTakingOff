@@ -1,4 +1,4 @@
-﻿using FlightTakingOff.Interfaces;
+using FlightTakingOff.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightTakingOff.FlightControllers
@@ -17,14 +17,10 @@ namespace FlightTakingOff.FlightControllers
 
         [HttpGet]
         [Route("[controller]")]
-
         public async Task<IActionResult> Get()
         {
+          return Ok(await _httpClientService.GetData());
 
-            return Ok(await _httpClientService.GetData());
-
-
-           
         }
 
     }
