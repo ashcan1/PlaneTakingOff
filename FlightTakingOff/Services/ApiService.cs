@@ -16,7 +16,7 @@ namespace FlightTakingOff.Services
       _settings = apiSettings.Value;
     }
         public async Task <RootObject>GetData() {
-      var URL = _settings.AccessKey;
+        var URL = _settings.AccessKey;
         string iataCode = "BHX";
         string type = "departure";
         using (var httpClient = new HttpClient())
@@ -36,3 +36,5 @@ namespace FlightTakingOff.Services
 
 
 // 
+
+
