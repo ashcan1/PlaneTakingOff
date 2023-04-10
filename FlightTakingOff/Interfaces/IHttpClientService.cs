@@ -1,4 +1,4 @@
-﻿namespace FlightTakingOff.Interfaces
+namespace FlightTakingOff.Interfaces
 {
     public interface IHttpClientService
     {

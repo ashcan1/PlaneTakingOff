@@ -36,6 +36,8 @@ builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSet
 
 
 builder.Services.AddScoped<IHttpClientService, ApiService>();
+builder.Services.AddHttpClient();
+
 
 
 
