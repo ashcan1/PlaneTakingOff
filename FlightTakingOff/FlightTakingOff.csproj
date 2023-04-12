@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -43,6 +44,10 @@
 
   <ItemGroup>
     <EditorConfigFiles Remove="C:\apis\FlightTakingOff\FlightTakingOff\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\CustomSwaggerUI.html" />
   </ItemGroup>
 
   <ItemGroup>
