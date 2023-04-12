@@ -18,7 +18,7 @@ builder.Services.AddCors((options) =>
 {
   options.AddPolicy("AngularAppilication", (builder) =>
   {
-    builder.WithOrigins("http://localhost:4200")
+    builder.WithOrigins("http://localhost:4200", "https://flighttracker-birmingham.web.app")
    .AllowAnyHeader()
    .WithMethods("GET", "POST", "PUT", "DELETE")
 .WithExposedHeaders("*");
