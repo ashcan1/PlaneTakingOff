@@ -5,8 +5,9 @@ namespace FlightTakingOff.FlightControllers
 {
 
 
-    [ApiController]
-    public class FlightController :Controller
+  [ApiController]
+  [Route("[controller]")]
+  public class FlightController : ControllerBase
     {
         private readonly IHttpClientService _httpClientService;
         public FlightController(IHttpClientService httpClientService)
@@ -16,7 +17,7 @@ namespace FlightTakingOff.FlightControllers
          
 
         [HttpGet]
-        [Route("[controller]")]
+     
         public async Task<IActionResult> Get()
         {
           return Ok(await _httpClientService.GetData());
