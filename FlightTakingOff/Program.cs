@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
+
 
 
 
@@ -13,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 
 builder.Services.AddCors((options) =>
 {
@@ -51,11 +54,16 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+app.UseRouting();
 app.UseCors("AngularAppilication");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/", async context =>
+{
+  await context.Response.WriteAsync("Welcome to Flight Tracker API");
+});
 
 app.Run();
