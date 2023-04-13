@@ -7,7 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 
+// Create the configuration object
+var config = new ConfigurationBuilder()
+    .AddEnvironmentVariables()
+    .Build();
 
+// Get the value of the FLIGHTLABS_API_ACCESS_KEY Config Var
+var accessKey = config["FLIGHTLABS_API_ACCESS_KEY"];
 
 
 
@@ -35,7 +41,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
+builder.Services.Configure<ApiSettings>(options =>
+{
+  options.AccessKey = accessKey;
+});
+
+//builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
 
 builder.Services.AddScoped<IHttpClientService, ApiService>();
