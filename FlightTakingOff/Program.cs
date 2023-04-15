@@ -29,6 +29,10 @@ builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSet
 builder.Services.AddScoped<IHttpClientService, ApiService>();
 builder.Services.AddHttpClient();
 var app = builder.Build();
+
+string port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+string url = $"http://0.0.0.0:{port}";
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -47,4 +51,4 @@ app.MapGet("/", async context =>
   await context.Response.WriteAsync("Welcome to Flight Tracker API");
 });
 
-app.Run();
+app.Run(url);
