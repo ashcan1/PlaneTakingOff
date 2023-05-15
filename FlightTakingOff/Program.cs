@@ -51,4 +51,4 @@ app.MapGet("/", async context =>
   await context.Response.WriteAsync("Welcome to Flight Tracker API");
 });
 
-app.Run(url);
+app.Run();
